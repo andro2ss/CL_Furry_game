@@ -1,7 +1,5 @@
 import "../sass/main.scss";
 
-console.log("Test");
-
 class Furry {
     constructor() {
         this.x = 0;
@@ -30,7 +28,7 @@ class Game {
     showFurry() {
         this.hideVisibleFurry();
         this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
-        document.addEventListener('keydown',(event) => {
+        document.addEventListener('keydown', (event) => {
             this.turnFurry(event);
         });
     }
@@ -63,6 +61,7 @@ class Game {
             this.furry.y = this.furry.y - 1;
         }
         this.showFurry();
+        this.checkCoinCollision();
     }
 
     turnFurry(event) {
@@ -76,6 +75,20 @@ class Game {
             this.furry.direction = "up"
         }
     }
+
+    checkCoinCollision() {
+        if (this.coin.x === this.furry.x && this.coin.y === this.furry.y){
+            const hideCoin = document.querySelector(".coin");
+            if (hideCoin !== null) {
+                hideCoin.classList.remove("coin");
+            }
+            this.coin = new Coin();
+            this.score ++;
+            document.getElementById("score").innerText = this.score;
+            this.showCoin();
+        }
+    }
+
 }
 
 const newGame = new Game();
