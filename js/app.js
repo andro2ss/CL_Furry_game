@@ -16,13 +16,20 @@ class Coin {
 }
 
 class Game {
-    board = document.querySelectorAll("#board div")
-    furry = new Furry();
-    coin = new Coin();
-    score = 0;
+    constructor() {
+        this.board = document.querySelectorAll("#board div")
+        this.furry = new Furry();
+        this.coin = new Coin();
+        this.score = 0;
+        this.speed = 1000;
+    }
 
     index(x, y) {
-        return x + (y * 10);
+        let yControl = 10
+        if (y < 0 || y > 9) {
+            yControl = 0;
+        }
+        return x + (y * yControl);
     }
 
     showFurry() {
@@ -44,12 +51,6 @@ class Game {
         this.board[this.index(this.coin.x, this.coin.y)].classList.add('coin');
     }
 
-    startGame() {
-        this.idSetInterval = setInterval(() => {
-            this.moveFurry();
-        }, 250);
-    }
-
     moveFurry() {
         if (this.furry.direction === "right") {
             this.furry.x = this.furry.x + 1;
@@ -62,6 +63,7 @@ class Game {
         }
         this.showFurry();
         this.checkCoinCollision();
+        this.gameOver();
     }
 
     turnFurry(event) {
@@ -77,16 +79,34 @@ class Game {
     }
 
     checkCoinCollision() {
-        if (this.coin.x === this.furry.x && this.coin.y === this.furry.y){
+        if (this.coin.x === this.furry.x && this.coin.y === this.furry.y) {
             const hideCoin = document.querySelector(".coin");
             if (hideCoin !== null) {
                 hideCoin.classList.remove("coin");
             }
             this.coin = new Coin();
-            this.score ++;
+            this.score++;
             document.getElementById("score").innerText = this.score;
             this.showCoin();
+            this.speed = this.speed * 0.9;
+            clearInterval(this.idSetInterval);
+            this.startGame();
         }
+    }
+
+    gameOver() {
+        if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9) {
+            clearInterval(this.idSetInterval);
+            this.hideVisibleFurry();
+            document.getElementById("over").classList.remove("hide");
+            document.getElementById("final-score").innerText = this.score;
+        }
+    }
+
+    startGame() {
+        this.idSetInterval = setInterval(() => {
+            this.moveFurry();
+        }, this.speed);
     }
 
 }
@@ -95,3 +115,7 @@ const newGame = new Game();
 newGame.showFurry();
 newGame.showCoin();
 newGame.startGame();
+
+document.querySelector(".btn").addEventListener("click", () => {
+    window.location.reload();
+})
