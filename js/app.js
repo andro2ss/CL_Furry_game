@@ -17,3 +17,27 @@ class Coin {
         this.y = Math.floor(Math.random() * 10);
     }
 }
+
+class Game {
+    board = document.querySelectorAll("#board div")
+    furry = new Furry();
+    coin = new Coin();
+    score = 0;
+
+    index(x, y) {
+        return x + (y * 10);
+    }
+
+    showFurry() {
+        this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
+
+    }
+
+    showCoin() {
+        this.board[this.index(this.coin.x, this.coin.y)].classList.add('coin');
+    }
+}
+
+const newGame = new Game();
+newGame.showFurry();
+newGame.showCoin();
