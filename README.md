@@ -1,11 +1,41 @@
-# Furry_game
+# JS Furry game
 
-Celem tego projektu jest napisanie prostej gry w JavaScript ES6. 
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#Technologies)
+* [Setup](#Setup)
+* [App website](#App-website)
 
-Bohaterem naszej gry jest **Furry**, który porusza się po planszy o rozmiarach 10x10 pól.
+## General info
 
-Na losowym polu planszy znajduje się moneta. Gracz, sterując Furrym przy pomocy strzałek na klawiaturze, musi dojść do monety. Gdy to zrobi, moneta znika z planszy i pojawia się na innym polu, również losowym, a gracz dostaje 1 punkt.
+The goal of this project is to write a simple game in JavaScript ES6.
 
-Gdy gracz uderzy w ścianę, gra się kończy: plansza znika i, jak to w grach komputerowych bywa, pojawia się napis "GAME OVER".
+The protagonist of our game is **Furry**, who moves around a 10x10 field board.
 
-W każdym momencie gry, gracz musi widzieć, ile monet już zebrał.
+On a random field of the board there is a coin. The player, controlling Furry with the keyboard arrows, must reach the coin. When he does, the coin disappears from the board and appears on another field, also random, and the player gets 1 point.
+
+When the player hits the wall, the game ends: the board disappears and, as is common in computer games, the word "GAME OVER" appears.
+
+At any point during the game, the player must see how many coins he has already collected.
+
+## Technologies
+- JavaScript
+- ES6
+- CSS
+- SCSS
+- Webpack
+
+## Setup
+To run this project, clone repo and install it locally using npm:
+
+```
+$ npm install
+```
+
+Next in terminal use:
+```
+$ npm start
+```
+## App website
+
+### None
